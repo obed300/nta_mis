@@ -1,0 +1,35 @@
+query Members($skip: Int, $take: Int, $filter: MemberFilterInput, $order: [MemberSortInput!]) {
+	members(skip: $skip, take: $take, where: $filter, order: $order) {
+		pageInfo {
+			hasNextPage
+			hasPreviousPage
+		}
+		totalCount
+		items {
+			additionalInformation
+			address
+			category
+			commencementYear
+			createdBy
+			employeeDetails
+			ghanaCardNumber
+			createdOn
+			description
+			email
+			id
+			membershipDeclaration
+			name
+			operationalArea
+			organization
+			phoneNumber
+			productMaterialCategory
+			reason
+			redgNo
+			registeredBy
+			revision
+			status
+			updatedBy
+			updatedOn
+		}
+	}
+}
