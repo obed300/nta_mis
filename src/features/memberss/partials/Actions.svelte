@@ -44,12 +44,12 @@
 {/if}
 <!-- {#if otherActions?.length}
 	<div class="flex flex-col">
-		<div class="mt-3 mb-1 font-thin text-gray-400">PODs</div>
+		<div class="mt-3 mb-1 font-thin text-gray-400">Actions</div>
 		<div class="flex flex-col gap-1">
 			{#each otherActions as action (action.id ?? action.label)}
 				<ActionButton showBg={false} showArrow {...action} onclick={() => onactionclick(action)} />
 			{/each}
 		</div>
 	</div>
-{/if} -->
-<div class="h-20"></div>
+{/if}
+<div class="h-20"></div> -->

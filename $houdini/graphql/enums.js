@@ -16,21 +16,6 @@ export const ApplyPolicy = {
     "VALIDATION": "VALIDATION"
 };
 
-export const CampaignEvent = {
-    "CREATED": "CREATED",
-    "EXECUTED": "EXECUTED",
-    "SUSPENDED": "SUSPENDED",
-    "EDITED": "EDITED"
-};
-
-export const CampaignFrequency = {
-    "ONCE": "ONCE",
-    "DAILY": "DAILY",
-    "WEEKLY": "WEEKLY",
-    "MONTHLY": "MONTHLY",
-    "YEARLY": "YEARLY"
-};
-
 export const EventType = {
     "INFORMATION": "INFORMATION",
     "WARNING": "WARNING",

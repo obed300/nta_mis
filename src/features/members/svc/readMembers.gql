@@ -7,17 +7,24 @@ query Members($skip: Int, $take: Int, $filter: MemberFilterInput, $order: [Membe
 		totalCount
 		items {
 			additionalInformation
-			address
+			address {
+				rootElement
+			}
 			category
 			commencementYear
 			createdBy
-			employeeDetails
+			employeeDetails {
+				rootElement
+			}
 			ghanaCardNumber
 			createdOn
 			description
 			email
 			id
-			membershipDeclaration
+			membershipDeclaration {
+				rootElement
+			}
+
 			name
 			operationalArea
 			organization
@@ -25,7 +32,9 @@ query Members($skip: Int, $take: Int, $filter: MemberFilterInput, $order: [Membe
 			productMaterialCategory
 			reason
 			redgNo
-			registeredBy
+			registeredBy {
+				rootElement
+			}
 			revision
 			status
 			updatedBy

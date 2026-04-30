@@ -35,6 +35,7 @@
 
 	import RightPanel from './rightPanel.svelte';
 	import { readMembers, readMembersFilter } from '$features/members/svc';
+	import AuthorizeActionForm from './AuthorizeActionForm.svelte';
 
 	let { data, onRemoveTab } = $props();
 
@@ -43,7 +44,10 @@
 	let elements = $state<IComponentDescriptor[]>([]);
 
 	// Actions updated to match the Maker-Checker flow
-	let actions = $state<any[]>([]);
+	let actions = $state<any[]>([
+		{ kind: 'approve', label: 'Approve Application', icon: 'ion:checkmark-circle-outline' },
+		{ kind: 'reject', label: 'Reject Application', icon: 'ion:close-circle-outline' }
+	]);
 
 	let otherActions = $state<any[]>([{ kind: 'file', label: 'Previous Request' }]);
 	let meta = $state<any>({});
@@ -176,11 +180,37 @@
 	// });
 </script>
 
-<div class="h-full w-full overflow-hidden px-5 pb-5">
-	<!-- Constrain to viewport height -->
+<!-- <div class="h-full w-full overflow-hidden px-5 pb-5">
+	
 	<div class="flex h-full w-full flex-col">
 		<div class="h-full w-full flex-grow overflow-y-auto rounded-lg bg-slate-50/50 p-2">
 			<ComponentCanvas children={elements} close={closeAComponent} {toggleCollapse} />
 		</div>
 	</div>
+</div> -->
+<div class="h-full w-full overflow-hidden px-5">
+    <div class="flex h-full w-full flex-grow">
+        <div class="h-full w-full flex-grow overflow-auto rounded-lg">
+            <ComponentCanvas children={elements} close={closeAComponent} {toggleCollapse} />
+        </div>
+        <div class="h-40"></div> 
+        <div class="flex h-full flex-grow">
+            <RightPanel {actions} {otherActions} onactionclick={onAction} {meta} />
+        </div> 
+    </div>
 </div>
+<Modal
+	bind:open={openActionModal}
+	onclose={() => (openActionModal = false)}
+	title={selectedAction?.label || 'Perform Action'}
+	size="md"
+>
+	{#if openActionModal && selectedAction}
+		<AuthorizeActionForm
+			{data}
+			action={selectedAction}
+			onClose={() => (openActionModal = false)}
+			onSuccess={handleActionSuccess}
+		/>
+	{/if}
+</Modal>

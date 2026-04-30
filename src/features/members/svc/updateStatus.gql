@@ -1,0 +1,9 @@
+mutation UpdateMemberStatus($input: UpdateMemberStatusInput) {
+	updateMemberStatus(input: $input) {
+		callResult {
+			success
+			message
+			code
+		}
+	}
+}

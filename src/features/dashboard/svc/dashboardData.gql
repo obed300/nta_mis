@@ -1,0 +1,32 @@
+query dashboardData($startDate: DateTime!, $endDate: DateTime!) {
+	
+
+
+    membersByRegion(startDate: $startDate, endDate: $endDate) {
+		child
+        parent
+		value
+	}
+
+    membershipShare(startDate: $startDate, endDate: $endDate) {
+		name
+		value
+	}
+
+    ntaMembersOverTime(startDate: $startDate, endDate: $endDate) {
+		child
+        parent
+		value
+	}
+
+    sesnetMembersOverTime(startDate: $startDate, endDate: $endDate) {
+		child
+        parent
+		value
+	}
+	totalNTAMembers(startDate: $startDate, endDate: $endDate)
+    totalSesnetMembers(startDate: $startDate, endDate: $endDate)
+	pendingApprovals(startDate: $startDate, endDate: $endDate)
+	rejectedApplications(startDate: $startDate, endDate: $endDate)
+	
+}

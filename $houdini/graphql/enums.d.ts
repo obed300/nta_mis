@@ -14,25 +14,6 @@ export declare const ApplyPolicy: {
 /** Defines when a policy shall be executed. */
 export type ApplyPolicy$options = ValuesOf<typeof ApplyPolicy>
  
-export declare const CampaignEvent: {
-    readonly CREATED: "CREATED";
-    readonly EXECUTED: "EXECUTED";
-    readonly SUSPENDED: "SUSPENDED";
-    readonly EDITED: "EDITED";
-}
-
-export type CampaignEvent$options = ValuesOf<typeof CampaignEvent>
- 
-export declare const CampaignFrequency: {
-    readonly ONCE: "ONCE";
-    readonly DAILY: "DAILY";
-    readonly WEEKLY: "WEEKLY";
-    readonly MONTHLY: "MONTHLY";
-    readonly YEARLY: "YEARLY";
-}
-
-export type CampaignFrequency$options = ValuesOf<typeof CampaignFrequency>
- 
 export declare const DedupeMatchMode: {
     readonly Variables: "Variables";
     readonly Operation: "Operation";

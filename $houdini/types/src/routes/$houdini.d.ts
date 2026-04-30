@@ -12,7 +12,7 @@ type EnsureDefined<T> = T extends null | undefined ? {} : T;
 type OptionalUnion<U extends Record<string, any>, A extends keyof U = U extends U ? keyof U : never> = U extends unknown ? { [P in Exclude<A, keyof U>]?: never } & U : never;
 export type Snapshot<T = any> = Kit.Snapshot<T>;
 type PageParentData = EnsureDefined<LayoutData>;
-type LayoutRouteId = RouteId | "/" | "/private/data-management" | "/private/data-management/dashboards" | "/private/data-management/departments" | "/private/data-management/reports" | "/private/data-management/roles" | "/private/data-management/sms" | "/private/data-management/ticket-categories" | "/private/data-management/user-statuses" | "/private/home" | "/private/members" | "/private/report-management" | "/private/support" | "/private/user-management" | null
+type LayoutRouteId = RouteId | "/" | "/private/data-management" | "/private/data-management/dashboards" | "/private/data-management/departments" | "/private/data-management/reports" | "/private/data-management/roles" | "/private/data-management/sms" | "/private/data-management/ticket-categories" | "/private/data-management/user-statuses" | "/private/home" | "/private/members" | "/private/report-management" | "/private/user-management" | null
 type LayoutParams = RouteParams & {  }
 type LayoutParentData = EnsureDefined<{}>;
 						type MakeOptional<Target, Keys extends keyof Target> = Omit<Target, Keys> & {

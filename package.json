@@ -51,8 +51,9 @@
 		]
 	},
 	"dependencies": {
-		"@rkosafo/cai.components": "^0.0.34",
+		"@rkosafo/cai.components": "^0.0.89",
 		"dayjs": "^1.11.19",
+		"echarts": "^6.0.0",
 		"filepond": "^4.32.9",
 		"filepond-plugin-image-preview": "^4.6.12",
 		"graphql": "^16.11.0",

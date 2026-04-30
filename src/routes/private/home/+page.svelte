@@ -1,7 +1,10 @@
 <script lang="ts">
 	import { activePage } from '$data/appStore.svelte';
+	import Home from '$features/dashboard/index.svelte';
 
-	activePage.setActivePage({ title: 'Dashboard', showBreadCrumb: false });
+	activePage.setActivePage({ title: 'Home', showBreadCrumb: false });
 </script>
 
-<div class="text-4xl text-red-600">home</div>
+<div class="h-full w-full">
+	<Home />
+</div>

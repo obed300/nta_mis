@@ -1,7 +1,7 @@
 export default {
     "name": "Members",
     "kind": "HoudiniQuery",
-    "hash": "db55aa7f14779a1813cbe7508338ab3bc310d84c88ec72ee74d8f1677a3072c2",
+    "hash": "b77a7793ed2ca3e217d9088aa4017343076a59cc0bc395e6c2b59d1db6871001",
 
     "raw": `query Members($skip: Int, $take: Int, $filter: MemberFilterInput, $order: [MemberSortInput!]) {
   members(skip: $skip, take: $take, where: $filter, order: $order) {
@@ -12,17 +12,23 @@ export default {
     totalCount
     items {
       additionalInformation
-      address
+      address {
+        rootElement
+      }
       category
       commencementYear
       createdBy
-      employeeDetails
+      employeeDetails {
+        rootElement
+      }
       ghanaCardNumber
       createdOn
       description
       email
       id
-      membershipDeclaration
+      membershipDeclaration {
+        rootElement
+      }
       name
       operationalArea
       organization
@@ -30,7 +36,9 @@ export default {
       productMaterialCategory
       reason
       redgNo
-      registeredBy
+      registeredBy {
+        rootElement
+      }
       revision
       status
       updatedBy
@@ -96,8 +104,19 @@ export default {
                                     },
 
                                     "address": {
-                                        "type": "String",
+                                        "type": "JsonDocument",
                                         "keyRaw": "address",
+
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON",
+                                                    "keyRaw": "rootElement",
+                                                    "visible": true
+                                                }
+                                            }
+                                        },
+
                                         "visible": true
                                     },
 
@@ -121,9 +140,20 @@ export default {
                                     },
 
                                     "employeeDetails": {
-                                        "type": "String",
+                                        "type": "JsonDocument",
                                         "keyRaw": "employeeDetails",
                                         "nullable": true,
+
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON",
+                                                    "keyRaw": "rootElement",
+                                                    "visible": true
+                                                }
+                                            }
+                                        },
+
                                         "visible": true
                                     },
 
@@ -160,9 +190,20 @@ export default {
                                     },
 
                                     "membershipDeclaration": {
-                                        "type": "String",
+                                        "type": "JsonDocument",
                                         "keyRaw": "membershipDeclaration",
                                         "nullable": true,
+
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON",
+                                                    "keyRaw": "rootElement",
+                                                    "visible": true
+                                                }
+                                            }
+                                        },
+
                                         "visible": true
                                     },
 
@@ -211,9 +252,20 @@ export default {
                                     },
 
                                     "registeredBy": {
-                                        "type": "String",
+                                        "type": "JsonDocument",
                                         "keyRaw": "registeredBy",
                                         "nullable": true,
+
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON",
+                                                    "keyRaw": "rootElement",
+                                                    "visible": true
+                                                }
+                                            }
+                                        },
+
                                         "visible": true
                                     },
 
@@ -282,6 +334,32 @@ export default {
                 "nendsWith": "String"
             },
 
+            "ListStringOperationFilterInput": {
+                "all": "StringOperationFilterInput",
+                "none": "StringOperationFilterInput",
+                "some": "StringOperationFilterInput",
+                "any": "Boolean"
+            },
+
+            "JsonValueKindOperationFilterInput": {
+                "eq": "JsonValueKind",
+                "neq": "JsonValueKind",
+                "in": "JsonValueKind",
+                "nin": "JsonValueKind"
+            },
+
+            "JsonElementFilterInput": {
+                "and": "JsonElementFilterInput",
+                "or": "JsonElementFilterInput",
+                "valueKind": "JsonValueKindOperationFilterInput"
+            },
+
+            "JsonDocumentFilterInput": {
+                "and": "JsonDocumentFilterInput",
+                "or": "JsonDocumentFilterInput",
+                "rootElement": "JsonElementFilterInput"
+            },
+
             "MembershipStatusOperationFilterInput": {
                 "eq": "MembershipStatus",
                 "neq": "MembershipStatus",
@@ -338,15 +416,17 @@ export default {
                 "and": "MemberFilterInput",
                 "or": "MemberFilterInput",
                 "name": "StringOperationFilterInput",
+                "registerAs": "StringOperationFilterInput",
                 "username": "StringOperationFilterInput",
                 "password": "StringOperationFilterInput",
                 "password2": "StringOperationFilterInput",
                 "organization": "StringOperationFilterInput",
+                "scopeOfServices": "ListStringOperationFilterInput",
                 "phoneNumber": "StringOperationFilterInput",
                 "ghanaCardNumber": "StringOperationFilterInput",
                 "email": "StringOperationFilterInput",
-                "address": "StringOperationFilterInput",
-                "employeeDetails": "StringOperationFilterInput",
+                "address": "JsonDocumentFilterInput",
+                "employeeDetails": "JsonDocumentFilterInput",
                 "operationalArea": "StringOperationFilterInput",
                 "commencementYear": "StringOperationFilterInput",
                 "redgNo": "StringOperationFilterInput",
@@ -354,10 +434,12 @@ export default {
                 "additionalInformation": "StringOperationFilterInput",
                 "productMaterialCategory": "StringOperationFilterInput",
                 "description": "StringOperationFilterInput",
-                "membershipDeclaration": "StringOperationFilterInput",
-                "registeredBy": "StringOperationFilterInput",
+                "imageUrls": "ListStringOperationFilterInput",
+                "membershipDeclaration": "JsonDocumentFilterInput",
+                "registeredBy": "JsonDocumentFilterInput",
                 "status": "MembershipStatusOperationFilterInput",
                 "reason": "StringOperationFilterInput",
+                "statusUpdatedAt": "DateTimeOperationFilterInput",
                 "createdBy": "StringOperationFilterInput",
                 "createdOn": "DateTimeOperationFilterInput",
                 "updatedBy": "StringOperationFilterInput",
@@ -366,8 +448,13 @@ export default {
                 "id": "LongOperationFilterInput"
             },
 
+            "JsonDocumentSortInput": {
+                "rootElement": "SortEnumType"
+            },
+
             "MemberSortInput": {
                 "name": "SortEnumType",
+                "registerAs": "SortEnumType",
                 "username": "SortEnumType",
                 "password": "SortEnumType",
                 "password2": "SortEnumType",
@@ -375,8 +462,8 @@ export default {
                 "phoneNumber": "SortEnumType",
                 "ghanaCardNumber": "SortEnumType",
                 "email": "SortEnumType",
-                "address": "SortEnumType",
-                "employeeDetails": "SortEnumType",
+                "address": "JsonDocumentSortInput",
+                "employeeDetails": "JsonDocumentSortInput",
                 "operationalArea": "SortEnumType",
                 "commencementYear": "SortEnumType",
                 "redgNo": "SortEnumType",
@@ -384,10 +471,11 @@ export default {
                 "additionalInformation": "SortEnumType",
                 "productMaterialCategory": "SortEnumType",
                 "description": "SortEnumType",
-                "membershipDeclaration": "SortEnumType",
-                "registeredBy": "SortEnumType",
+                "membershipDeclaration": "JsonDocumentSortInput",
+                "registeredBy": "JsonDocumentSortInput",
                 "status": "SortEnumType",
                 "reason": "SortEnumType",
+                "statusUpdatedAt": "SortEnumType",
                 "createdBy": "SortEnumType",
                 "createdOn": "SortEnumType",
                 "updatedBy": "SortEnumType",
@@ -405,4 +493,4 @@ export default {
     "partial": false
 };
 
-"HoudiniHash=f860e96e2ee764ff7f78ba07ff325782a1e26f3036d631482518ef248500e865";
+"HoudiniHash=871d26e9c97a984625c1646e88d796f1cba91c0af296a0636d7ca3fece451589";

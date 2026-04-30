@@ -1,5 +1,5 @@
-import { MembersStore, type MemberFilterInput, type MemberSortInput } from '$houdini';
-import { getPageInfo, gqlError, queryResult } from '$lib/shared';
+import { MembersStore, UpdateMemberStatusStore, type MemberFilterInput, type MemberSortInput, type UpdateMemberStatusInput } from '$houdini';
+import { callResult, getPageInfo, gqlError, queryResult } from '$lib/shared';
 
 export async function readMembers(
 	page: number = 1,
@@ -41,6 +41,15 @@ export async function readMembersFilter(
 			}
 		});
 		return queryResult(ret, ret.data?.members);
+	} catch (error) {
+		return gqlError(error);
+	}
+}
+
+export async function updateMemberStatus(input: UpdateMemberStatusInput) {
+	try {
+		const ret = await new UpdateMemberStatusStore().mutate({ input });
+		return callResult(ret, ret.data?.updateMemberStatus.callResult as any);
 	} catch (error) {
 		return gqlError(error);
 	}

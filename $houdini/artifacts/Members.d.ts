@@ -1,4 +1,5 @@
 import type { SortEnumType } from "$houdini/graphql/enums";
+import type { JsonValueKind } from "$houdini/graphql/enums";
 import { MembershipStatus } from "$houdini/graphql/enums";
 import type { ValueOf } from "$houdini/runtime/lib/types";
 
@@ -28,17 +29,23 @@ export type Members$result = {
         */
         readonly items: ({
             readonly additionalInformation: string | null;
-            readonly address: string;
+            readonly address: {
+                readonly rootElement: any;
+            };
             readonly category: string | null;
             readonly commencementYear: string;
             readonly createdBy: string;
-            readonly employeeDetails: string | null;
+            readonly employeeDetails: {
+                readonly rootElement: any;
+            } | null;
             readonly ghanaCardNumber: string | null;
             readonly createdOn: Date;
             readonly description: string | null;
             readonly email: string;
             readonly id: number;
-            readonly membershipDeclaration: string | null;
+            readonly membershipDeclaration: {
+                readonly rootElement: any;
+            } | null;
             readonly name: string;
             readonly operationalArea: string;
             readonly organization: string;
@@ -46,7 +53,9 @@ export type Members$result = {
             readonly productMaterialCategory: string | null;
             readonly reason: string | null;
             readonly redgNo: string;
-            readonly registeredBy: string | null;
+            readonly registeredBy: {
+                readonly rootElement: any;
+            } | null;
             readonly revision: number;
             readonly status: ValueOf<typeof MembershipStatus>;
             readonly updatedBy: string;
@@ -68,6 +77,32 @@ type StringOperationFilterInput = {
     nstartsWith?: string | null | undefined;
     endsWith?: string | null | undefined;
     nendsWith?: string | null | undefined;
+};
+
+type ListStringOperationFilterInput = {
+    all?: StringOperationFilterInput | null | undefined;
+    none?: StringOperationFilterInput | null | undefined;
+    some?: StringOperationFilterInput | null | undefined;
+    any?: boolean | null | undefined;
+};
+
+type JsonValueKindOperationFilterInput = {
+    eq?: ValueOf<typeof JsonValueKind> | null | undefined;
+    neq?: ValueOf<typeof JsonValueKind> | null | undefined;
+    in?: (ValueOf<typeof JsonValueKind>)[] | null | undefined;
+    nin?: (ValueOf<typeof JsonValueKind>)[] | null | undefined;
+};
+
+type JsonElementFilterInput = {
+    and?: (JsonElementFilterInput)[] | null | undefined;
+    or?: (JsonElementFilterInput)[] | null | undefined;
+    valueKind?: JsonValueKindOperationFilterInput | null | undefined;
+};
+
+type JsonDocumentFilterInput = {
+    and?: (JsonDocumentFilterInput)[] | null | undefined;
+    or?: (JsonDocumentFilterInput)[] | null | undefined;
+    rootElement?: JsonElementFilterInput | null | undefined;
 };
 
 type MembershipStatusOperationFilterInput = {
@@ -126,15 +161,17 @@ type MemberFilterInput = {
     and?: (MemberFilterInput)[] | null | undefined;
     or?: (MemberFilterInput)[] | null | undefined;
     name?: StringOperationFilterInput | null | undefined;
+    registerAs?: StringOperationFilterInput | null | undefined;
     username?: StringOperationFilterInput | null | undefined;
     password?: StringOperationFilterInput | null | undefined;
     password2?: StringOperationFilterInput | null | undefined;
     organization?: StringOperationFilterInput | null | undefined;
+    scopeOfServices?: ListStringOperationFilterInput | null | undefined;
     phoneNumber?: StringOperationFilterInput | null | undefined;
     ghanaCardNumber?: StringOperationFilterInput | null | undefined;
     email?: StringOperationFilterInput | null | undefined;
-    address?: StringOperationFilterInput | null | undefined;
-    employeeDetails?: StringOperationFilterInput | null | undefined;
+    address?: JsonDocumentFilterInput | null | undefined;
+    employeeDetails?: JsonDocumentFilterInput | null | undefined;
     operationalArea?: StringOperationFilterInput | null | undefined;
     commencementYear?: StringOperationFilterInput | null | undefined;
     redgNo?: StringOperationFilterInput | null | undefined;
@@ -142,10 +179,12 @@ type MemberFilterInput = {
     additionalInformation?: StringOperationFilterInput | null | undefined;
     productMaterialCategory?: StringOperationFilterInput | null | undefined;
     description?: StringOperationFilterInput | null | undefined;
-    membershipDeclaration?: StringOperationFilterInput | null | undefined;
-    registeredBy?: StringOperationFilterInput | null | undefined;
+    imageUrls?: ListStringOperationFilterInput | null | undefined;
+    membershipDeclaration?: JsonDocumentFilterInput | null | undefined;
+    registeredBy?: JsonDocumentFilterInput | null | undefined;
     status?: MembershipStatusOperationFilterInput | null | undefined;
     reason?: StringOperationFilterInput | null | undefined;
+    statusUpdatedAt?: DateTimeOperationFilterInput | null | undefined;
     createdBy?: StringOperationFilterInput | null | undefined;
     createdOn?: DateTimeOperationFilterInput | null | undefined;
     updatedBy?: StringOperationFilterInput | null | undefined;
@@ -154,8 +193,13 @@ type MemberFilterInput = {
     id?: LongOperationFilterInput | null | undefined;
 };
 
+type JsonDocumentSortInput = {
+    rootElement?: ValueOf<typeof SortEnumType> | null | undefined;
+};
+
 type MemberSortInput = {
     name?: ValueOf<typeof SortEnumType> | null | undefined;
+    registerAs?: ValueOf<typeof SortEnumType> | null | undefined;
     username?: ValueOf<typeof SortEnumType> | null | undefined;
     password?: ValueOf<typeof SortEnumType> | null | undefined;
     password2?: ValueOf<typeof SortEnumType> | null | undefined;
@@ -163,8 +207,8 @@ type MemberSortInput = {
     phoneNumber?: ValueOf<typeof SortEnumType> | null | undefined;
     ghanaCardNumber?: ValueOf<typeof SortEnumType> | null | undefined;
     email?: ValueOf<typeof SortEnumType> | null | undefined;
-    address?: ValueOf<typeof SortEnumType> | null | undefined;
-    employeeDetails?: ValueOf<typeof SortEnumType> | null | undefined;
+    address?: JsonDocumentSortInput | null | undefined;
+    employeeDetails?: JsonDocumentSortInput | null | undefined;
     operationalArea?: ValueOf<typeof SortEnumType> | null | undefined;
     commencementYear?: ValueOf<typeof SortEnumType> | null | undefined;
     redgNo?: ValueOf<typeof SortEnumType> | null | undefined;
@@ -172,10 +216,11 @@ type MemberSortInput = {
     additionalInformation?: ValueOf<typeof SortEnumType> | null | undefined;
     productMaterialCategory?: ValueOf<typeof SortEnumType> | null | undefined;
     description?: ValueOf<typeof SortEnumType> | null | undefined;
-    membershipDeclaration?: ValueOf<typeof SortEnumType> | null | undefined;
-    registeredBy?: ValueOf<typeof SortEnumType> | null | undefined;
+    membershipDeclaration?: JsonDocumentSortInput | null | undefined;
+    registeredBy?: JsonDocumentSortInput | null | undefined;
     status?: ValueOf<typeof SortEnumType> | null | undefined;
     reason?: ValueOf<typeof SortEnumType> | null | undefined;
+    statusUpdatedAt?: ValueOf<typeof SortEnumType> | null | undefined;
     createdBy?: ValueOf<typeof SortEnumType> | null | undefined;
     createdOn?: ValueOf<typeof SortEnumType> | null | undefined;
     updatedBy?: ValueOf<typeof SortEnumType> | null | undefined;
@@ -194,7 +239,7 @@ export type Members$input = {
 export type Members$artifact = {
     "name": "Members";
     "kind": "HoudiniQuery";
-    "hash": "db55aa7f14779a1813cbe7508338ab3bc310d84c88ec72ee74d8f1677a3072c2";
+    "hash": "b77a7793ed2ca3e217d9088aa4017343076a59cc0bc395e6c2b59d1db6871001";
     "raw": `query Members($skip: Int, $take: Int, $filter: MemberFilterInput, $order: [MemberSortInput!]) {
   members(skip: $skip, take: $take, where: $filter, order: $order) {
     pageInfo {
@@ -204,17 +249,23 @@ export type Members$artifact = {
     totalCount
     items {
       additionalInformation
-      address
+      address {
+        rootElement
+      }
       category
       commencementYear
       createdBy
-      employeeDetails
+      employeeDetails {
+        rootElement
+      }
       ghanaCardNumber
       createdOn
       description
       email
       id
-      membershipDeclaration
+      membershipDeclaration {
+        rootElement
+      }
       name
       operationalArea
       organization
@@ -222,7 +273,9 @@ export type Members$artifact = {
       productMaterialCategory
       reason
       redgNo
-      registeredBy
+      registeredBy {
+        rootElement
+      }
       revision
       status
       updatedBy
@@ -278,8 +331,17 @@ export type Members$artifact = {
                                         "visible": true;
                                     };
                                     "address": {
-                                        "type": "String";
+                                        "type": "JsonDocument";
                                         "keyRaw": "address";
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON";
+                                                    "keyRaw": "rootElement";
+                                                    "visible": true;
+                                                };
+                                            };
+                                        };
                                         "visible": true;
                                     };
                                     "category": {
@@ -299,9 +361,18 @@ export type Members$artifact = {
                                         "visible": true;
                                     };
                                     "employeeDetails": {
-                                        "type": "String";
+                                        "type": "JsonDocument";
                                         "keyRaw": "employeeDetails";
                                         "nullable": true;
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON";
+                                                    "keyRaw": "rootElement";
+                                                    "visible": true;
+                                                };
+                                            };
+                                        };
                                         "visible": true;
                                     };
                                     "ghanaCardNumber": {
@@ -332,9 +403,18 @@ export type Members$artifact = {
                                         "visible": true;
                                     };
                                     "membershipDeclaration": {
-                                        "type": "String";
+                                        "type": "JsonDocument";
                                         "keyRaw": "membershipDeclaration";
                                         "nullable": true;
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON";
+                                                    "keyRaw": "rootElement";
+                                                    "visible": true;
+                                                };
+                                            };
+                                        };
                                         "visible": true;
                                     };
                                     "name": {
@@ -375,9 +455,18 @@ export type Members$artifact = {
                                         "visible": true;
                                     };
                                     "registeredBy": {
-                                        "type": "String";
+                                        "type": "JsonDocument";
                                         "keyRaw": "registeredBy";
                                         "nullable": true;
+                                        "selection": {
+                                            "fields": {
+                                                "rootElement": {
+                                                    "type": "JSON";
+                                                    "keyRaw": "rootElement";
+                                                    "visible": true;
+                                                };
+                                            };
+                                        };
                                         "visible": true;
                                     };
                                     "revision": {
@@ -436,6 +525,28 @@ export type Members$artifact = {
                 "endsWith": "String";
                 "nendsWith": "String";
             };
+            "ListStringOperationFilterInput": {
+                "all": "StringOperationFilterInput";
+                "none": "StringOperationFilterInput";
+                "some": "StringOperationFilterInput";
+                "any": "Boolean";
+            };
+            "JsonValueKindOperationFilterInput": {
+                "eq": "JsonValueKind";
+                "neq": "JsonValueKind";
+                "in": "JsonValueKind";
+                "nin": "JsonValueKind";
+            };
+            "JsonElementFilterInput": {
+                "and": "JsonElementFilterInput";
+                "or": "JsonElementFilterInput";
+                "valueKind": "JsonValueKindOperationFilterInput";
+            };
+            "JsonDocumentFilterInput": {
+                "and": "JsonDocumentFilterInput";
+                "or": "JsonDocumentFilterInput";
+                "rootElement": "JsonElementFilterInput";
+            };
             "MembershipStatusOperationFilterInput": {
                 "eq": "MembershipStatus";
                 "neq": "MembershipStatus";
@@ -488,15 +599,17 @@ export type Members$artifact = {
                 "and": "MemberFilterInput";
                 "or": "MemberFilterInput";
                 "name": "StringOperationFilterInput";
+                "registerAs": "StringOperationFilterInput";
                 "username": "StringOperationFilterInput";
                 "password": "StringOperationFilterInput";
                 "password2": "StringOperationFilterInput";
                 "organization": "StringOperationFilterInput";
+                "scopeOfServices": "ListStringOperationFilterInput";
                 "phoneNumber": "StringOperationFilterInput";
                 "ghanaCardNumber": "StringOperationFilterInput";
                 "email": "StringOperationFilterInput";
-                "address": "StringOperationFilterInput";
-                "employeeDetails": "StringOperationFilterInput";
+                "address": "JsonDocumentFilterInput";
+                "employeeDetails": "JsonDocumentFilterInput";
                 "operationalArea": "StringOperationFilterInput";
                 "commencementYear": "StringOperationFilterInput";
                 "redgNo": "StringOperationFilterInput";
@@ -504,10 +617,12 @@ export type Members$artifact = {
                 "additionalInformation": "StringOperationFilterInput";
                 "productMaterialCategory": "StringOperationFilterInput";
                 "description": "StringOperationFilterInput";
-                "membershipDeclaration": "StringOperationFilterInput";
-                "registeredBy": "StringOperationFilterInput";
+                "imageUrls": "ListStringOperationFilterInput";
+                "membershipDeclaration": "JsonDocumentFilterInput";
+                "registeredBy": "JsonDocumentFilterInput";
                 "status": "MembershipStatusOperationFilterInput";
                 "reason": "StringOperationFilterInput";
+                "statusUpdatedAt": "DateTimeOperationFilterInput";
                 "createdBy": "StringOperationFilterInput";
                 "createdOn": "DateTimeOperationFilterInput";
                 "updatedBy": "StringOperationFilterInput";
@@ -515,8 +630,12 @@ export type Members$artifact = {
                 "revision": "IntOperationFilterInput";
                 "id": "LongOperationFilterInput";
             };
+            "JsonDocumentSortInput": {
+                "rootElement": "SortEnumType";
+            };
             "MemberSortInput": {
                 "name": "SortEnumType";
+                "registerAs": "SortEnumType";
                 "username": "SortEnumType";
                 "password": "SortEnumType";
                 "password2": "SortEnumType";
@@ -524,8 +643,8 @@ export type Members$artifact = {
                 "phoneNumber": "SortEnumType";
                 "ghanaCardNumber": "SortEnumType";
                 "email": "SortEnumType";
-                "address": "SortEnumType";
-                "employeeDetails": "SortEnumType";
+                "address": "JsonDocumentSortInput";
+                "employeeDetails": "JsonDocumentSortInput";
                 "operationalArea": "SortEnumType";
                 "commencementYear": "SortEnumType";
                 "redgNo": "SortEnumType";
@@ -533,10 +652,11 @@ export type Members$artifact = {
                 "additionalInformation": "SortEnumType";
                 "productMaterialCategory": "SortEnumType";
                 "description": "SortEnumType";
-                "membershipDeclaration": "SortEnumType";
-                "registeredBy": "SortEnumType";
+                "membershipDeclaration": "JsonDocumentSortInput";
+                "registeredBy": "JsonDocumentSortInput";
                 "status": "SortEnumType";
                 "reason": "SortEnumType";
+                "statusUpdatedAt": "SortEnumType";
                 "createdBy": "SortEnumType";
                 "createdOn": "SortEnumType";
                 "updatedBy": "SortEnumType";

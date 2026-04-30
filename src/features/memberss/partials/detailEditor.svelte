@@ -214,7 +214,9 @@
 	// --- Derived Parsers for JSON strings ---
 	const address = $derived.by(() => {
 		try {
-			return typeof data.address === 'string' ? JSON.parse(data.address) : data.address || {};
+			return typeof data.address.rootElement === 'string'
+				? JSON.parse(data.address.rootElement)
+				: data.address.rootElement || {};
 		} catch {
 			return {};
 		}
@@ -222,9 +224,9 @@
 
 	const employeeDetails = $derived.by(() => {
 		try {
-			return typeof data.employeeDetails === 'string'
-				? JSON.parse(data.employeeDetails)
-				: data.employeeDetails || {};
+			return typeof data.employeeDetails.rootElement === 'string'
+				? JSON.parse(data.employeeDetails.rootElement)
+				: data.employeeDetails.rootElement || {};
 		} catch {
 			return {};
 		}
@@ -232,9 +234,9 @@
 
 	const declaration = $derived.by(() => {
 		try {
-			return typeof data.membershipDeclaration === 'string'
-				? JSON.parse(data.membershipDeclaration)
-				: data.membershipDeclaration || {};
+			return typeof data.membershipDeclaration.rootElement === 'string'
+				? JSON.parse(data.membershipDeclaration.rootElement)
+				: data.membershipDeclaration.rootElement || {};
 		} catch {
 			return {};
 		}
