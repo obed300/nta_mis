@@ -1,8 +1,8 @@
 import type { Record } from "./public/record";
-import { dashboardData$result, dashboardData$input } from "../artifacts/dashboardData";
-import { dashboardDataStore } from "../plugins/houdini-svelte/stores/dashboardData";
 import { Members$result, Members$input } from "../artifacts/Members";
 import { MembersStore } from "../plugins/houdini-svelte/stores/Members";
+import { dashboardData$result, dashboardData$input } from "../artifacts/dashboardData";
+import { dashboardDataStore } from "../plugins/houdini-svelte/stores/dashboardData";
 import type { UserActivityType } from "$houdini/graphql/enums";
 import type { EventType } from "$houdini/graphql/enums";
 import type { ServiceEvent } from "$houdini/graphql/enums";
@@ -2996,5 +2996,5 @@ export declare type CacheTypeDef = {
         };
     };
     lists: {};
-    queries: [[MembersStore, Members$result, Members$input], [dashboardDataStore, dashboardData$result, dashboardData$input]];
+    queries: [[dashboardDataStore, dashboardData$result, dashboardData$input], [MembersStore, Members$result, Members$input]];
 };

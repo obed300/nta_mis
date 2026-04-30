@@ -103,71 +103,71 @@
 	}
 </script>
 
-{#if !userInfo.value}
+<!-- {#if !userInfo.value}
 	<div class="flex h-screen w-screen items-center justify-center">
 		<IconifyIcon icon="svg-spinners:3-dots-move" class="text-purple-600" style="font-size: 80px;" />
 	</div>
-{:else}
-	<div class="h-screen w-screen">
-		<TFLayoutWrapper>
-			{#snippet sidebar()}
-				<TFSidebar
-					appName="NTA"
-					appShortName="NTA"
-					logoUrl={logo}
-					homeUrl="/private/home"
-					menuItems={menuItems.value}
-					{hideSidebar}
-					{isActiveFunction}
-				/>
-			{/snippet}
-			{#snippet content()}
-				<TFContentWrapper>
-					{#snippet topBar()}
-						<TFHeader
-							notificationCount={3}
-							bind:hideSidebar
-							onsignout={() => (showAlert = true)}
-							title={activePage.value.title}
-							user={{
-								firstName: userInfo.value?.firstName,
-								lastName: userInfo.value?.lastName,
-								initials: userInfo.value?.initials,
-								fullName: userInfo.value?.name,
-								role: userInfo.value?.role,
-								username: userInfo.value?.username
-							}}
-						>
-							{#snippet notificationList()}
-								<NotificationList
-									read={fetchNotifications}
-									onclick={handleClickNotification}
-									onClearNotifications={handleClearNofications}
+{:else} -->
+<div class="h-screen w-screen">
+	<TFLayoutWrapper>
+		{#snippet sidebar()}
+			<TFSidebar
+				appName="NTA"
+				appShortName="NTA"
+				logoUrl={logo}
+				homeUrl="/private/home"
+				menuItems={menuItems.value}
+				{hideSidebar}
+				{isActiveFunction}
+			/>
+		{/snippet}
+		{#snippet content()}
+			<TFContentWrapper>
+				{#snippet topBar()}
+					<TFHeader
+						notificationCount={3}
+						bind:hideSidebar
+						onsignout={() => (showAlert = true)}
+						title={activePage.value.title}
+						user={{
+							firstName: userInfo.value?.firstName,
+							lastName: userInfo.value?.lastName,
+							initials: userInfo.value?.initials,
+							fullName: userInfo.value?.name,
+							role: userInfo.value?.role,
+							username: userInfo.value?.username
+						}}
+					>
+						{#snippet notificationList()}
+							<NotificationList
+								read={fetchNotifications}
+								onclick={handleClickNotification}
+								onClearNotifications={handleClearNofications}
+							/>
+						{/snippet}
+					</TFHeader>
+				{/snippet}
+				{#snippet children()}
+					<div class="flex h-full flex-grow flex-col">
+						{#if activePage.value.showBreadCrumb}
+							<div class="pt-3 pl-6">
+								<Breadcrumb
+									options={breadcrumbData.value}
+									{activeBreadCrumb}
+									onclik={breadcrumbClicked}
 								/>
-							{/snippet}
-						</TFHeader>
-					{/snippet}
-					{#snippet children()}
-						<div class="flex h-full flex-grow flex-col">
-							{#if activePage.value.showBreadCrumb}
-								<div class="pt-3 pl-6">
-									<Breadcrumb
-										options={breadcrumbData.value}
-										{activeBreadCrumb}
-										onclik={breadcrumbClicked}
-									/>
-								</div>
-							{/if}
-							<div class="h-100 w-full flex-grow pt-4">
-								{@render defaultChildren()}
 							</div>
+						{/if}
+						<div class="h-100 w-full flex-grow pt-4">
+							{@render defaultChildren()}
 						</div>
-					{/snippet}
-				</TFContentWrapper>
-			{/snippet}
-		</TFLayoutWrapper>
-	</div>
-{/if}
+					</div>
+				{/snippet}
+			</TFContentWrapper>
+		{/snippet}
+	</TFLayoutWrapper>
+</div>
+<!-- {/if} -->
 
 <AlertDialog
 	bind:open={showAlert}

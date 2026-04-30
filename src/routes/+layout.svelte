@@ -7,16 +7,16 @@
 
 	let interval: NodeJS.Timer | null = $state(null);
 
-	onMount(() => {
-		interval = setInterval(() => {
-			authService.refreshToken();
-		}, 30000);
-		authService.init({
-			url: 'https://auth.recoverathome.org/auth',
-			realm: 'recover',
-			clientId: 'kyabirwa'
-		});
-	});
+	// onMount(() => {
+	// 	interval = setInterval(() => {
+	// 		authService.refreshToken();
+	// 	}, 30000);
+	// 	authService.init({
+	// 		url: 'https://auth.recoverathome.org/auth',
+	// 		realm: 'recover',
+	// 		clientId: 'kyabirwa'
+	// 	});
+	// });
 	onDestroy(() => clearInterval(interval as any));
 </script>
 
